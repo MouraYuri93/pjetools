@@ -2,4 +2,4 @@
 
 |-|-|-|-|  
 
-|Processo|TipoDocumento|Id Expediente|Id Sigad|Órgão julgador|Data Criação|Data ciência|
+|Processo|TipoDocumento|Id Expediente|Órgão julgador|Data Criação|Data ciência|Id Sigad|
