@@ -1,7 +1,7 @@
 package br.com.acpgroup.safira.tools.extractor;
 
 import br.com.acpgroup.safira.tools.ConfigReader;
-import br.com.acpgroup.safira.tools.excel.ExcelHandler;
+import br.com.acpgroup.safira.tools.validator.ExcelHandler;
 import br.com.acpgroup.safira.tools.model.PjeModel;
 import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;

@@ -21,7 +21,7 @@ public class ExcelHandler {
             "Destinatario", "DataCriacao", "DataLimiteCiencia", "DataCiencia", "Prazo"
     };
 
-    public void writeExcel(String comarca, String grupo, List<PjeModel> models, String data) throws IOException {
+    public void writeExcel(String comarca, List<PjeModel> models, String data) throws IOException {
         String filePath = ConfigReader.getWorkspacePath() + "/" + comarca + ".xlsx";
         File file = new File(filePath);
 
@@ -49,6 +49,7 @@ public class ExcelHandler {
 
         for (PjeModel model : models) {
             Row row = sheet.createRow(rowIndex++);
+            String grupo = "";
             populateRow(row, model, grupo, dateCellStyle);
             log.info(model.toString());
         }
@@ -64,7 +65,7 @@ public class ExcelHandler {
     public void exportToExcel(Set<PjeModel> models, String fileName) throws IOException {
         String filePath = ConfigReader.getWorkspacePath() + "/" + fileName + ".xlsx";
         Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet("Dados");
+        Sheet sheet = workbook.createSheet("Dados"); //colocar data do dia da consulta
 
         createHeaderRow(workbook, sheet);
 

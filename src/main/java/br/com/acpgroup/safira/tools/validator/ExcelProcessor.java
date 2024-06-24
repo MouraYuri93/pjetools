@@ -27,6 +27,7 @@ public class ExcelProcessor {
 
         Validator validator = new Validator(dbUrl, dbUser, dbPassword);
 
+        assert excelList != null;
         for (File file : excelList) {
             ExcelReader reader = new ExcelReader();
             List<PjeModel> models = reader.readExcel(file);
@@ -34,12 +35,11 @@ public class ExcelProcessor {
             validator.validateModels(models);
 
             String originalFileName = file.getName();
-            String comarca = originalFileName.split("_")[1].split("-")[0]; // Extraindo a comarca do nome do arquivo
             String grupo = originalFileName.split("-")[1]; // Extraindo o nome do grupo do nome do arquivo
 
             String data = originalFileName.substring(0, 8);
-            ExcelWriter writer = new ExcelWriter();
-            writer.writeExcel(comarca, grupo, models, data);
+            ExcelHandler writer = new ExcelHandler();
+            writer.writeExcel(grupo, models, data);
 
             File processedFile = new File(file.getAbsolutePath() + ".proc");
             Files.move(file.toPath(), processedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
