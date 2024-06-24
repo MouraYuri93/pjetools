@@ -9,11 +9,12 @@ public class PjeModel {
     private String destinatario;
     private String tipoDocumento;
     private Long numeroDocumento;
+    private Long idSigad;
     private String meioComunicacao;
-    private String prazo;
     private Date dataCriacao;
     private Date dataLimiteCiencia;
     private Date dataCiencia;
     private String processo;
-    private Long idSigad;
+    private String prazo;
+
 }

@@ -17,14 +17,15 @@ public class ExcelExporter {
     private static String[] columns = {
             "Processo",
             "NumeroDocumento",
+            "IdSigad",
             "TipoDocumento",
             "MeioComunicacao",
             "Destinatario",
-            "Prazo",
             "DataCriacao",
             "DataLimiteCiencia",
             "DataCiencia",
-            "IdSigad"
+            "Prazo"
+
     };
 
     public static void run(Set<PjeModel> data, String title){
@@ -61,10 +62,10 @@ public class ExcelExporter {
 
             row.createCell(0).setCellValue(pje.getProcesso());
             row.createCell(1, CellType.NUMERIC).setCellValue(pje.getNumeroDocumento());
-            row.createCell(2).setCellValue(pje.getTipoDocumento());
-            row.createCell(3).setCellValue(pje.getMeioComunicacao());
-            row.createCell(4).setCellValue(pje.getDestinatario());
-            row.createCell(5).setCellValue(pje.getPrazo());
+            row.createCell(3).setCellValue(pje.getTipoDocumento());
+            row.createCell(4).setCellValue(pje.getMeioComunicacao());
+            row.createCell(5).setCellValue(pje.getDestinatario());
+            row.createCell(9).setCellValue(pje.getPrazo());
 
             if(pje.getDataCriacao() != null) {
                 Cell cell = row.createCell(6);

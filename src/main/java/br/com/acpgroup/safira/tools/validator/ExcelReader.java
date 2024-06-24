@@ -26,10 +26,10 @@ public class ExcelReader {
                 PjeModel model = new PjeModel();
                 model.setProcesso(row.getCell(0).toString());
                 model.setNumeroDocumento((long)row.getCell(1).getNumericCellValue());
-                model.setTipoDocumento(row.getCell(2).toString());
-                model.setMeioComunicacao(row.getCell(3).toString());
-                model.setDestinatario(row.getCell(4).toString());
-                model.setPrazo(row.getCell(5).toString());
+                model.setTipoDocumento(row.getCell(3).toString());
+                model.setMeioComunicacao(row.getCell(4).toString());
+                model.setDestinatario(row.getCell(5).toString());
+                model.setPrazo(row.getCell(9).toString());
                 model.setDataCriacao(row.getCell(6) != null? row.getCell(6).getDateCellValue() : null);
                 model.setDataLimiteCiencia(row.getCell(7)!= null? row.getCell(7).getDateCellValue(): null);
                 model.setDataCiencia(row.getCell(8)!= null?row.getCell(8).getDateCellValue(): null);
