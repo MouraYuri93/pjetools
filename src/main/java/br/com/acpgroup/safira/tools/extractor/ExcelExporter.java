@@ -15,6 +15,7 @@ import java.util.Set;
 public class ExcelExporter {
 
     private static String[] columns = {
+            "Grupo",  // Adicionando a coluna para o grupo
             "Processo",
             "NumeroDocumento",
             "IdSigad",
@@ -25,17 +26,16 @@ public class ExcelExporter {
             "DataLimiteCiencia",
             "DataCiencia",
             "Prazo"
-
     };
 
-    public static void run(Set<PjeModel> data, String title){
+    public static void run(Set<PjeModel> data, String title, String grupo) {
         File destinoPath = new File(ConfigReader.getWorkspacePath());
-        if(!destinoPath.exists()){
+        if (!destinoPath.exists()) {
             destinoPath.mkdir();
         }
 
         Workbook workbook = new XSSFWorkbook();
-        Sheet sheet = workbook.createSheet(title.substring(0,8));
+        Sheet sheet = workbook.createSheet(title.substring(0, 8));
 
         Font headerFont = workbook.createFont();
         headerFont.setBold(true);
@@ -53,34 +53,35 @@ public class ExcelExporter {
             cell.setCellStyle(headerCellStyle);
         }
 
-        CellStyle dateCellStyle  = workbook.createCellStyle();
+        CellStyle dateCellStyle = workbook.createCellStyle();
         dateCellStyle.setDataFormat(workbook.getCreationHelper().createDataFormat().getFormat("dd/MM/yyyy HH:mm:ss"));
 
         int rowNum = 1;
         for (PjeModel pje : data) {
             Row row = sheet.createRow(rowNum++);
 
-            row.createCell(0).setCellValue(pje.getProcesso());
-            row.createCell(1, CellType.NUMERIC).setCellValue(pje.getNumeroDocumento());
-            row.createCell(3).setCellValue(pje.getTipoDocumento());
-            row.createCell(4).setCellValue(pje.getMeioComunicacao());
-            row.createCell(5).setCellValue(pje.getDestinatario());
-            row.createCell(9).setCellValue(pje.getPrazo());
+            row.createCell(0).setCellValue(grupo); // Adicionando o nome do grupo
+            row.createCell(1).setCellValue(pje.getProcesso());
+            row.createCell(2, CellType.NUMERIC).setCellValue(pje.getNumeroDocumento());
+            row.createCell(4).setCellValue(pje.getTipoDocumento());
+            row.createCell(5).setCellValue(pje.getMeioComunicacao());
+            row.createCell(6).setCellValue(pje.getDestinatario());
+            row.createCell(10).setCellValue(pje.getPrazo());
 
-            if(pje.getDataCriacao() != null) {
-                Cell cell = row.createCell(6);
+            if (pje.getDataCriacao() != null) {
+                Cell cell = row.createCell(7);
                 cell.setCellStyle(dateCellStyle);
                 cell.setCellValue(pje.getDataCriacao());
             }
 
-            if(pje.getDataLimiteCiencia() != null) {
-                Cell cell = row.createCell(7);
+            if (pje.getDataLimiteCiencia() != null) {
+                Cell cell = row.createCell(8);
                 cell.setCellStyle(dateCellStyle);
                 cell.setCellValue(pje.getDataLimiteCiencia());
             }
 
-            if(pje.getDataCiencia() != null) {
-                Cell cell = row.createCell(8);
+            if (pje.getDataCiencia() != null) {
+                Cell cell = row.createCell(9);
                 cell.setCellStyle(dateCellStyle);
                 cell.setCellValue(pje.getDataCiencia());
             }
@@ -92,9 +93,9 @@ public class ExcelExporter {
             sheet.autoSizeColumn(i);
         }
 
-        try (FileOutputStream fileOut = new FileOutputStream(ConfigReader.getWorkspacePath() + "/" + title+".xlsx")) {
+        try (FileOutputStream fileOut = new FileOutputStream(ConfigReader.getWorkspacePath() + "/" + title + ".xlsx")) {
             workbook.write(fileOut);
-            log.info("Created File:" + title);
+            log.info("Created File: " + title);
         } catch (IOException e) {
             log.error(e.getMessage());
         }

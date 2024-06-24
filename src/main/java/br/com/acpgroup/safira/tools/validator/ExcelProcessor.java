@@ -13,14 +13,13 @@ import java.util.List;
 
 public class ExcelProcessor {
 
-    public  void run() throws IOException, SQLException {
-        File[] excelList = new File(ConfigReader.getWorkspacePath()).listFiles(new FilenameFilter(){
+    public void run() throws IOException, SQLException {
+        File[] excelList = new File(ConfigReader.getWorkspacePath()).listFiles(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 return name.toLowerCase().endsWith(".xlsx");
             }
         });
-
 
         String dbUrl = ConfigReader.getDatabaseConfig();
         String dbUser = ConfigReader.getDatabaseUser();
@@ -35,13 +34,12 @@ public class ExcelProcessor {
             validator.validateModels(models);
 
             String originalFileName = file.getName();
-            String descricao = originalFileName.substring(16);
-            String data = originalFileName.substring(0, 8);
-            String outputFileName = descricao;
-            File outputFile = new File(ConfigReader.getWorkspacePath() +"/validado/" + outputFileName);
-            ExcelWriter writer = new ExcelWriter();
-            writer.writeExcel(outputFile, models, data);
+            String comarca = originalFileName.split("_")[1].split("-")[0]; // Extraindo a comarca do nome do arquivo
+            String grupo = originalFileName.split("-")[1]; // Extraindo o nome do grupo do nome do arquivo
 
+            String data = originalFileName.substring(0, 8);
+            ExcelWriter writer = new ExcelWriter();
+            writer.writeExcel(comarca, grupo, models, data);
 
             File processedFile = new File(file.getAbsolutePath() + ".proc");
             Files.move(file.toPath(), processedFile.toPath(), StandardCopyOption.REPLACE_EXISTING);

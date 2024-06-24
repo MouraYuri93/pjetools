@@ -17,7 +17,7 @@ public class Validator {
     public void validateModels(List<PjeModel> models) throws SQLException {
         for (PjeModel model : models) {
             Long id = database.doesRecordExist(model.getProcesso(), model.getNumeroDocumento());
-            if(id != null ) {
+            if (id != null) {
                 model.setIdSigad(id);
             }
         }

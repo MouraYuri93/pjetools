@@ -6,6 +6,7 @@ import java.util.Date;
 
 @Data
 public class PjeModel {
+    private String grupo;
     private String destinatario;
     private String tipoDocumento;
     private Long numeroDocumento;
