@@ -16,14 +16,14 @@ public class ExcelWriter {
     private static String[] columns = {
             "Processo",
             "NumeroDocumento",
+            "IdSigad",
             "TipoDocumento",
             "MeioComunicacao",
             "Destinatario",
-            "Prazo",
             "DataCriacao",
             "DataLimiteCiencia",
             "DataCiencia",
-            "IdSigad"
+            "Prazo"
     };
 
     public void writeExcel(File file, List<PjeModel> models, String data) throws IOException {
@@ -66,10 +66,10 @@ public class ExcelWriter {
             Row row = sheet.createRow(rowIndex++);
             row.createCell(0).setCellValue(model.getProcesso());
             row.createCell(1).setCellValue(model.getNumeroDocumento());
-            row.createCell(2).setCellValue(model.getTipoDocumento());
-            row.createCell(3).setCellValue(model.getMeioComunicacao());
-            row.createCell(4).setCellValue(model.getDestinatario());
-            row.createCell(5).setCellValue(model.getPrazo());
+            row.createCell(3).setCellValue(model.getTipoDocumento());
+            row.createCell(4).setCellValue(model.getMeioComunicacao());
+            row.createCell(5).setCellValue(model.getDestinatario());
+            row.createCell(9).setCellValue(model.getPrazo());
 
             if(model.getDataCriacao() != null) {
                 Cell cell = row.createCell(6);
@@ -89,7 +89,7 @@ public class ExcelWriter {
                 cell.setCellValue(model.getDataCiencia());
             }
             if(model.getIdSigad() != null) {
-                row.createCell(9).setCellValue(model.getIdSigad());
+                row.createCell(2).setCellValue(model.getIdSigad());
             }
             log.info(model.toString());
         }
